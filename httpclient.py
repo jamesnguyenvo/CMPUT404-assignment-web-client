@@ -95,7 +95,7 @@ class HTTPClient(object):
         close_line = "Connection: close\r\n\r\n"
 
         headers = request_line + host_line + ua_line + accept_line + close_line
-        print(headers)
+        # print(headers)
         self.connect(host, port)
         self.sendall(headers)
 
