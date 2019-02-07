@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
-# Copyright 2016 Abram Hindle, https://github.com/tywtyw2002, and https://github.com/treedust
+# Copyright 2016 Abram Hindle, James Vo, https://github.com/tywtyw2002, and https://github.com/treedust
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,7 +72,12 @@ class HTTPClient(object):
 
     # python3 httpclient.py GET http://google.com
     def GET(self, url, args=None):
-        parse = urllib.parse.urlparse(url)
+        if "http" in url or "https" in url:
+            parse = urllib.parse.urlparse(url)
+        else:
+            url = "http://" + url
+            parse = urllib.parse.urlparse(url)
+
         host = parse.hostname
         path = parse.path
         port = parse.port
@@ -90,7 +95,7 @@ class HTTPClient(object):
         close_line = "Connection: close\r\n\r\n"
 
         headers = request_line + host_line + ua_line + accept_line + close_line
-
+        print(headers)
         self.connect(host, port)
         self.sendall(headers)
 
@@ -106,7 +111,12 @@ class HTTPClient(object):
 
     # python3 httpclient.py POST http://google.com
     def POST(self, url, args=None):
-        parse = urllib.parse.urlparse(url)
+        if "http" in url or "https" in url:
+            parse = urllib.parse.urlparse(url)
+        else:
+            url = "http://" + url
+            parse = urllib.parse.urlparse(url)
+
         host = parse.hostname
         path = parse.path
         port = parse.port
@@ -131,7 +141,7 @@ class HTTPClient(object):
         close_line = "Connection: close\r\n\r\n"
 
         headers = request_line + host_line + accept_line + ct_line + cl_line + close_line + arg
-        
+        # print(headers)
         self.connect(host, port)
         self.sendall(headers)
         
