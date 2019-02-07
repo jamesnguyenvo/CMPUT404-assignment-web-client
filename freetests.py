@@ -206,7 +206,7 @@ class TestHTTPClient(unittest.TestCase):
 
         
         
-    # consider disabling this test until everything else works
+    # # consider disabling this test until everything else works
     def testInternetGets(self):
         '''Test HTTP Get in the wild, these webservers are far less
            forgiving'''
